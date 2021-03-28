@@ -1,0 +1,24 @@
+---
+- include: install_nomad.yaml
+  when: stage == "build"
+- include: install_docker.yaml
+  when:
+    - stage == "build"
+    - role == "client"
+- include: install_vault.yaml
+  when:
+    - stage == "build"
+    - role == "server"
+- include: install_consul.yaml
+  when:
+    - stage == "build"
+- include: configure_consul.yaml
+  when:
+    - stage == "configure"
+- include: configure_nomad.yaml
+  when:
+    - stage == "configure"
+- include: configure_vault.yaml
+  when:
+    - stage == "configure"
+    - role == "server"

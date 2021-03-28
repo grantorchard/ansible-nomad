@@ -1,0 +1,11 @@
+---
+- name: Copy Consul Agent Configuration
+  template:
+    src: consul.hcl
+    dest: /etc/consul.d/consul.hcl
+
+- name: Start Consul Service
+  systemd:
+    name: consul
+    enabled: yes
+    state: started

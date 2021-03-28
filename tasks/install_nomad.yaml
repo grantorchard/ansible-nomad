@@ -1,0 +1,31 @@
+---
+- name: Install Nomad
+  apt:
+    name: nomad-enterprise
+    state: latest
+    update_cache: yes
+
+- name: Create Nomad Data Directory
+  file:
+    state: directory
+    path: "{{ nomad_data_dir }}"
+    owner: nomad
+    group: nomad
+
+- name: Disable Nomad Service
+  systemd:
+    name: nomad
+    enabled: no
+
+- name: Create CNI Directory
+  when: role == "client"
+  file:
+    state: directory
+    path: /opt/cni/bin
+
+- name: Install CNI
+  when: role == "client"
+  unarchive:
+    src: https://github.com/containernetworking/plugins/releases/download/v0.9.0/cni-plugins-linux-amd64-v0.9.0.tgz
+    dest: /opt/cni/bin
+    remote_src: yes

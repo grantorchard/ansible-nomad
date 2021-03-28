@@ -1,0 +1,11 @@
+---
+consul_data_dir: "/opt/data/consul"
+consul_connect: true
+
+nomad_data_dir: "/opt/data/nomad"
+
+vault_data_dir: "/opt/data/vault"
+vault_addr: "https://vault-cluster.vault.11eb56d6-0f95-3a99-a33c-0242ac110007.aws.hashicorp.cloud:8200"
+vault_namespace: "admin"
+
+hashicorp_datacenter: humblelabvm
